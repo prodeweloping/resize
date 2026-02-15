@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Image Size Reducer</title>
+  <title>Image Size Reducer · Pro Developing</title>
   <link rel="icon" type="image/png" href="Pro.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,19 +12,24 @@
   <!-- Tailwind (for navbar/footer only) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Google Font: Inter (bold & clean) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --footer-height: 64px;
+      --footer-height: 70px;
     }
 
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body{
+      font-family: 'Inter', 'Segoe UI', sans-serif;
       background: linear-gradient(135deg,#1a2980 0%,#26d0ce 100%);
       min-height:100vh;
       display:flex;
@@ -32,8 +37,62 @@
       overflow-x:hidden;
     }
 
-    /* ================= NAVBAR ================= */
-    nav{ position:fixed; top:0; left:0; right:0; z-index:50; }
+    /* ✅ NEW NAVBAR (blue+orange logo + whatsapp) */
+    .new-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.02);
+      padding: 0.6rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-blue {
+      color: #007BFF;
+      font-weight: 800;
+      font-size: 1.9rem;
+      letter-spacing: -0.5px;
+    }
+    .logo-orange {
+      color: #FF6F00;
+      font-weight: 800;
+      font-size: 1.9rem;
+      letter-spacing: -0.5px;
+    }
+    .whatsapp-nav {
+      background-color: #25D366;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.8rem;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+      box-shadow: 0 6px 12px rgba(37,211,102,0.2);
+      text-decoration: none;
+    }
+    .whatsapp-nav:hover {
+      transform: scale(1.12);
+      box-shadow: 0 10px 18px rgba(37,211,102,0.35);
+    }
+
+    /* floating whatsapp (matches navbar style) */
+    .whatsapp-float {
+      background-color: #25D366;
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 2rem; box-shadow: 0 8px 20px rgba(37,211,102,0.3);
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
 
     /* ================= MAIN CONTAINER ================= */
     .main-wrapper{
@@ -150,16 +209,25 @@
       transition:.25s;
     }
 
-    .btn-primary{
-      background:linear-gradient(to right,#1a2980,#26d0ce);
-      color:white;
+    /* ✅ GRADIENT BUTTON for Resize (replaces old primary) */
+    .btn-gradient {
+      background: linear-gradient(145deg, #007BFF, #FF6F00);
+      background-size: 150% auto;
+      color: white;
+      box-shadow: 0 8px 18px rgba(0, 123, 255, 0.25);
+    }
+    .btn-gradient:hover {
+      background-position: right center;
+      transform: translateY(-4px);
+      box-shadow: 0 16px 26px rgba(255, 111, 0, 0.3);
     }
 
     .btn-secondary{
       background:#eee;
     }
-
-    .btn-primary:hover{ transform:translateY(-2px); }
+    .btn-secondary:hover {
+      background:#ddd;
+    }
 
     #imagePreview{
       max-width:100%;
@@ -195,64 +263,67 @@
       display:inline-flex;
       gap:10px;
       align-items:center;
-      background:linear-gradient(to right,#2ecc71,#27ae60);
+      background:linear-gradient(145deg,#059669,#10b981);
       color:white;
       padding:16px 26px;
-      border-radius:8px;
+      border-radius:60px;
       text-decoration:none;
       font-weight:600;
+      transition: all 0.3s ease;
+    }
+    #downloadBtn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 26px rgba(5,150,105,0.3);
     }
 
-    /* ================= FOOTER ================= */
-    footer{
-      background:#111827;
-      color:white;
-      height:var(--footer-height);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex-shrink:0;
+    /* ================= FOOTER (fixed, exact design) ================= */
+    footer.fixed-footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: var(--footer-height);
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 30;
+      padding: 0 16px;
+      box-shadow: 0 -4px 20px rgba(2,6,23,0.12);
+    }
+    .design-footer {
+      color: #94a3b8;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    .design-footer .yellow-link {
+      color: #fbbf24;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .design-footer .yellow-link:hover {
+      text-decoration: underline;
     }
 
     @media(max-width:768px){
-      footer{
-        position:fixed;
-        bottom:0;
-        left:0;
-        right:0;
-        z-index:40;
-      }
+      footer.fixed-footer{ position: fixed; }
       .buttons{ flex-direction:column; }
       header h1{ font-size:2.1rem; }
-    }
-
-    /* ================= WHATSAPP ================= */
-    .whatsapp-btn{
-      width:46px;
-      height:46px;
-      border-radius:12px;
-      background:#25D366;
-      color:white;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow:0 6px 18px rgba(0,0,0,.18);
     }
   </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="bg-white shadow-sm">
-  <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
-    <span class="text-xl font-bold text-indigo-600">
-      Pro <span class="text-gray-800">Developing</span>
-    </span>
-    <a id="waTop" class="whatsapp-btn" href="#">
-      <i class="fa-brands fa-whatsapp"></i>
-    </a>
+<!-- ✅ NEW NAVBAR (Pro blue + Developing orange) with WhatsApp icon -->
+<nav class="new-nav">
+  <div class="flex items-center">
+    <span class="logo-blue">Pro</span>
+    <span class="logo-orange">Developing</span>
   </div>
+  <a id="waTop" class="whatsapp-nav" href="#" title="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
 </nav>
 
 <!-- MAIN -->
@@ -266,7 +337,7 @@
 
     <div class="app-container">
 
-      <!-- UPLOAD -->
+      <!-- UPLOAD SECTION -->
       <div class="upload-section">
         <div class="section-title"><i class="fas fa-upload"></i> Upload</div>
         <div class="section-content">
@@ -286,7 +357,8 @@
             </div>
 
             <div class="buttons">
-              <button class="btn btn-primary" id="resizeBtn">
+              <!-- ✅ GRADIENT BUTTON for Resize -->
+              <button class="btn btn-gradient" id="resizeBtn">
                 <i class="fas fa-compress-alt"></i> Resize
               </button>
               <button class="btn btn-secondary" id="resetBtn">
@@ -297,7 +369,7 @@
         </div>
       </div>
 
-      <!-- PREVIEW -->
+      <!-- PREVIEW SECTION -->
       <div class="preview-section">
         <div class="section-title"><i class="fas fa-image"></i> Preview</div>
         <div class="section-content">
@@ -323,20 +395,32 @@
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  © Powered by
-  <a href="https://www.prodeveloping.online/" target="_blank"
-     class="ml-1 text-indigo-400 underline">Pro Developing</a>
+<!-- ✅ NEW FOOTER: "Design by Pro Developing" with yellow link -->
+<footer class="fixed-footer">
+  <div class="design-footer">
+    Design by <a href="https://www.prodeveloping.online/" target="_blank" class="yellow-link">Pro Developing</a>
+  </div>
 </footer>
 
-<!-- FLOATING WHATSAPP -->
-<a id="waFloat" class="whatsapp-btn"
-   style="position:fixed;right:16px;bottom:calc(var(--footer-height) + 16px);z-index:60;">
-  <i class="fa-brands fa-whatsapp fa-lg"></i>
+<!-- Floating WhatsApp (bottom-right) -->
+<a id="waFloat" class="whatsapp-float" href="#" style="position:fixed; right:16px; bottom:calc(var(--footer-height) + 16px); z-index:45;" title="Chat on WhatsApp">
+  <i class="fa-brands fa-whatsapp fa-2x"></i>
 </a>
 
 <script>
+// WhatsApp setup
+const waNumber = '916356952788';
+const waMessage = encodeURIComponent('Hello! I am using your Image Size Reducer 😊');
+document.getElementById('waTop').onclick = e => {
+  e.preventDefault();
+  window.open(`https://wa.me/${waNumber}?text=${waMessage}`, '_blank');
+};
+document.getElementById('waFloat').onclick = e => {
+  e.preventDefault();
+  window.open(`https://wa.me/${waNumber}?text=${waMessage}`, '_blank');
+};
+
+// UI elements
 const uploadArea=document.getElementById('uploadArea');
 const imageInput=document.getElementById('imageInput');
 const preview=document.getElementById('imagePreview');
@@ -388,13 +472,7 @@ resizeBtn.onclick=()=>{
 };
 
 resetBtn.onclick=()=>location.reload();
-
-// WhatsApp
-const wa='916356952788';
-const msg=encodeURIComponent('Hello! I am using your Image Size Reducer 😊');
-document.getElementById('waTop').onclick=e=>{e.preventDefault();window.open(`https://wa.me/${wa}?text=${msg}`)};
-document.getElementById('waFloat').onclick=e=>{e.preventDefault();window.open(`https://wa.me/${wa}?text=${msg}`)};
 </script>
 
 </body>
-  </html>
+</html>

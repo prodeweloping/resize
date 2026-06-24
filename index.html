@@ -2,19 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Image Resizer · Pro Developing</title>
-  <link rel="icon" type="image/png" href="Pro.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Image Resizer · Pro Toolss</title>
+  <link rel="icon" type="image/png" href="https://i.ibb.co/FkJPMZ8r/Chat-GPT-Image-Jun-18-2026-07-58-22-AM.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- Google Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --footer-height: 70px;
-    }
     * {
       margin: 0;
       padding: 0;
@@ -22,273 +18,317 @@
     }
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f5f7ff 0%, #eef2ff 100%);
+      background: linear-gradient(145deg, #f6f9fc 0%, #e9f0f8 100%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      padding-top: 80px;
       overflow-x: hidden;
     }
-    
-    /* NAVBAR (exactly from Age Calculator) */
+
     .new-nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 50;
-      background: rgba(255,255,255,0.98);
-      backdrop-filter: blur(4px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.02);
-      padding: 0.6rem 2rem;
+      z-index: 999;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .06);
+      padding: 12px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     }
-    .logo-blue {
-      color: #007BFF;
+    .logo {
+      font-size: 28px;
       font-weight: 800;
-      font-size: 1.9rem;
       letter-spacing: -0.5px;
     }
-    .logo-orange {
-      color: #FF6F00;
-      font-weight: 800;
-      font-size: 1.9rem;
-      letter-spacing: -0.5px;
-    }
-    .whatsapp-nav {
-      background-color: #25D366;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
+    .logo-blue { color: #007BFF; }
+    .logo-orange { color: #FF6F00; }
+    .home-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.8rem;
-      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
-      box-shadow: 0 6px 12px rgba(37,211,102,0.2);
       text-decoration: none;
+      transition: transform 0.2s ease;
     }
-    .whatsapp-nav:hover {
-      transform: scale(1.12);
-      box-shadow: 0 10px 18px rgba(37,211,102,0.35);
+    .home-btn:hover { transform: scale(0.96); }
+    .home-btn .lines {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .home-btn .lines span {
+      width: 24px;
+      height: 3px;
+      background: #1e293b;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+    .home-btn .label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    /* Beat animation (same as age calculator) */
-    @keyframes beat { 
-      0%{transform:scale(1)}
-      50%{transform:scale(1.07)}
-      100%{transform:scale(1)} 
+    footer {
+      background: #0b1426;
+      color: white;
+      height: 64px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: auto;
     }
-    .beat{ animation: beat 2s infinite; }
+    .design-footer {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    .highlight {
+      color: #facc15;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    @media (max-width: 768px) {
+      footer {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 35;
+      }
+      body { padding-bottom: 64px; }
+    }
 
-    /* Main container */
     .main-container {
       width: 100%;
-      max-width: 650px;
+      max-width: 600px;
       margin: 0 auto;
-      padding: 20px 16px;
-      padding-top: 96px;
-      padding-bottom: calc(var(--footer-height) + 24px);
+      padding: 16px 14px;
       flex: 1 0 auto;
     }
 
-    /* Floating WhatsApp */
-    .whatsapp-float {
-      background-color: #25D366;
-      width: 56px; 
-      height: 56px; 
-      border-radius: 50%;
-      display: flex; 
-      align-items: center; 
-      justify-content: center;
-      color: white; 
-      font-size: 2rem; 
-      box-shadow: 0 8px 20px rgba(37,211,102,0.3);
-      transition: transform 0.2s;
-      text-decoration: none;
-    }
-    .whatsapp-float:hover { transform: scale(1.1); }
-
-    /* Card Style */
     .card {
-      background: white;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(4px);
       border-radius: 2rem;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255,255,255,0.5);
       overflow: hidden;
-      border: 1px solid rgba(37, 99, 235, 0.1);
+      border: 1px solid rgba(255,255,255,0.6);
     }
     .card-header {
-      background: #fafcff;
-      padding: 1.2rem 1.5rem;
+      background: rgba(255,255,255,0.5);
+      padding: 1rem 1.4rem;
       border-bottom: 2px solid #eef2ff;
       font-weight: 700;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      color: #1e293b;
+      color: #0f172a;
+      letter-spacing: -0.3px;
     }
     .card-body {
-      padding: 1.8rem;
+      padding: 1.6rem 1.4rem;
     }
 
-    /* Dropzone */
     .dropzone {
       border: 2px dashed #cbd5e1;
-      background: #fafcff;
+      background: rgba(255,255,255,0.4);
       border-radius: 1.5rem;
-      padding: 2rem 1rem;
+      padding: 1.8rem 1rem;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s;
-      margin-bottom: 1.5rem;
+      transition: all 0.25s;
+      margin-bottom: 1.4rem;
     }
     .dropzone.drag-over {
-      background: #eff6ff;
+      background: #eef6ff;
       border-color: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
     }
     .upload-icon {
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       color: #3b82f6;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.2rem;
     }
     .file-input-label {
-      background: linear-gradient(105deg, #3b82f6, #ea580c);
+      background: linear-gradient(105deg, #2563eb, #ea580c);
       display: inline-block;
       padding: 0.6rem 1.6rem;
-      border-radius: 40px;
-      margin-top: 0.8rem;
+      border-radius: 12px;
+      margin-top: 0.6rem;
       font-weight: 600;
       font-size: 0.9rem;
       color: white;
       cursor: pointer;
       transition: 0.2s;
       border: none;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.2);
     }
-    .file-input-label:active {
-      transform: scale(0.96);
-    }
+    .file-input-label:active { transform: scale(0.96); }
 
-    /* Target Area */
     .target-area {
-      background: linear-gradient(115deg, #f1f5f9, #ffffff);
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(2px);
       border-radius: 1.5rem;
-      padding: 1.2rem;
+      padding: 1.2rem 1.2rem 1.5rem;
       margin: 1rem 0;
-      border: 1px solid #e0e7ff;
+      border: 1px solid rgba(224, 231, 255, 0.5);
     }
     .label-row {
       display: flex;
       justify-content: space-between;
       font-weight: 700;
-      margin-bottom: 0.8rem;
-      font-size: 1rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+      color: #1e293b;
     }
     .manual-input-group {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
       background: white;
-      padding: 0.5rem 1rem;
-      border-radius: 3rem;
+      padding: 0.2rem 0.6rem 0.2rem 1rem;
+      border-radius: 14px;
       border: 2px solid #e2e8f0;
       transition: 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
     .manual-input-group:focus-within {
       border-color: #ea580c;
-      box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2);
+      box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.12);
     }
     #targetKbInput {
       flex: 2;
       background: transparent;
       border: none;
-      padding: 0.8rem 0.5rem;
+      padding: 0.7rem 0.2rem;
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       text-align: center;
       outline: none;
-      font-family: monospace;
+      font-family: 'Inter', monospace;
+      color: #0f172a;
+      min-width: 60px;
     }
     .kb-unit-badge {
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #ea580c;
       background: #fff3e6;
       padding: 0.3rem 0.8rem;
-      border-radius: 2rem;
+      border-radius: 10px;
     }
-    .slider-wrapper {
-      margin-top: 1rem;
-    }
+    .slider-wrapper { margin-top: 1rem; }
     input[type="range"] {
       width: 100%;
       height: 6px;
       border-radius: 10px;
-      background: #cbd5e1;
+      background: #d1d9e6;
       -webkit-appearance: none;
-    }
-    input[type="range"]:focus {
-      outline: none;
+      appearance: none;
     }
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
+      appearance: none;
       width: 20px;
       height: 20px;
       background: #ea580c;
-      border-radius: 50%;
+      border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 10px rgba(234,88,12,0.25);
+      transition: 0.15s;
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: #ea580c;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 10px rgba(234,88,12,0.25);
     }
     .type-hint {
       font-size: 0.7rem;
       color: #ea580c;
-      margin-top: 0.5rem;
+      margin-top: 0.6rem;
       text-align: center;
+      opacity: 0.8;
     }
     .error-hint {
       color: #dc2626;
       background: #fee2e2;
-      border-radius: 2rem;
+      border-radius: 10px;
       padding: 0.3rem 0.8rem;
       font-size: 0.75rem;
       margin-top: 0.5rem;
       text-align: center;
     }
 
-    /* Buttons */
-    .btn-primary {
-      background: linear-gradient(145deg, #2563eb, #ea580c);
+    .btn-square {
       border: none;
-      width: 100%;
-      padding: 1rem;
-      border-radius: 2rem;
+      border-radius: 14px;
+      padding: 0.9rem 1.2rem;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: white;
       cursor: pointer;
-      transition: all 0.2s;
-      margin-top: 0.5rem;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
     }
-    .btn-primary:active { transform: scale(0.97); }
-    .btn-primary:disabled {
+    .btn-square:active { transform: scale(0.96); }
+    .btn-square:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
+      box-shadow: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(145deg, #2563eb, #ea580c);
+      box-shadow: 0 6px 20px rgba(37,99,235,0.2);
+    }
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(37,99,235,0.3);
+    }
+
+    .btn-success {
+      background: linear-gradient(145deg, #059669, #10b981);
+      box-shadow: 0 6px 20px rgba(5,150,105,0.2);
+    }
+    .btn-success:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(5,150,105,0.3);
     }
 
     .result-box {
-      background: #eef2ff;
+      background: rgba(238, 242, 255, 0.5);
+      backdrop-filter: blur(2px);
       border-radius: 1rem;
-      padding: 1rem;
+      padding: 0.9rem 1rem;
       text-align: center;
-      margin: 1.2rem 0;
+      margin: 1rem 0;
+      border: 1px solid rgba(255,255,255,0.4);
     }
     .loader {
       display: inline-flex;
@@ -299,521 +339,486 @@
       width: 8px;
       height: 8px;
       background: #2563eb;
-      border-radius: 50%;
+      border-radius: 6px;
       display: inline-block;
       animation: bounce 0.6s infinite alternate;
     }
     @keyframes bounce {
-      0% { transform: translateY(0px); opacity: 0.3;}
-      100% { transform: translateY(-6px); opacity: 1;}
+      0% { transform: translateY(0px); opacity: 0.3; }
+      100% { transform: translateY(-6px); opacity: 1; }
     }
     .error-text { color: #dc2626; }
     .success-text { color: #059669; }
 
-    #downloadBtnMain {
-      background: linear-gradient(105deg, #059669, #10b981);
-      border: none;
-      width: 100%;
-      padding: 0.9rem;
-      border-radius: 2rem;
-      font-weight: 700;
-      font-size: 1rem;
-      color: white;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    #downloadBtnMain:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    
     .file-info {
-      background: #f1f5f9;
+      background: rgba(241, 245, 249, 0.6);
+      backdrop-filter: blur(2px);
       border-radius: 1rem;
-      padding: 0.8rem;
-      margin: 1rem 0;
+      padding: 0.7rem 0.9rem;
+      margin: 0.8rem 0;
       font-size: 0.85rem;
       text-align: center;
+      border: 1px solid rgba(255,255,255,0.3);
     }
-    
-    /* Badge Row */
-    .badge-row {
-      display: flex;
-      justify-content: center;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-      margin: 1rem 0;
-    }
-    .quick-badge {
-      background: white;
-      border-radius: 40px;
-      padding: 0.4rem 1rem;
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: #2563eb;
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      border: 1px solid #e2e8f0;
-    }
-    .quick-badge:hover {
-      background: #2563eb;
-      color: white;
-      transform: translateY(-2px);
-    }
-    
+
     .hero-text {
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.4rem;
     }
     .hero-text h1 {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       font-weight: 800;
       background: linear-gradient(135deg, #0f172a, #2563eb, #ea580c);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
+      letter-spacing: -0.5px;
     }
     .hero-text p {
       color: #475569;
       font-size: 0.9rem;
+      margin-top: 2px;
     }
 
-    @media (max-width: 650px) {
-      .card-body { padding: 1.2rem; }
-      #targetKbInput { font-size: 1rem; }
-    }
-
-    /* Footer exactly from Age Calculator */
-    footer {
-      background: #0f172a;
-      color: white;
-      height: var(--footer-height);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 12px;
-      box-sizing: border-box;
-      flex-shrink: 0;
-      font-size: 1rem;
-    }
-    .design-footer {
-      color: #94a3b8;
-    }
-    .design-footer .yellow {
-      color: #fbbf24;
-      font-weight: 700;
-      text-decoration: none;
-    }
-    .design-footer .yellow:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 768px) {
-      footer {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 35;
-      }
-      .main-container {
-        padding-bottom: calc(var(--footer-height) + 24px);
-      }
+    @media (max-width: 480px) {
+      body { padding-top: 72px; }
+      .logo { font-size: 24px; }
+      .new-nav { padding: 10px 16px; }
+      .card-body { padding: 1.2rem 1rem; }
+      .card-header { padding: 0.8rem 1rem; font-size: 1rem; }
+      .hero-text h1 { font-size: 1.4rem; }
+      #targetKbInput { font-size: 1rem; padding: 0.5rem 0.1rem; }
+      .btn-square { font-size: 0.9rem; padding: 0.8rem 0.8rem; border-radius: 12px; }
+      .dropzone { padding: 1.4rem 0.8rem; }
+      .file-input-label { font-size: 0.8rem; padding: 0.5rem 1.2rem; }
+      .target-area { padding: 1rem 0.8rem 1.2rem; }
+      .manual-input-group { padding: 0.1rem 0.4rem 0.1rem 0.8rem; }
+      .kb-unit-badge { font-size: 0.85rem; padding: 0.2rem 0.6rem; }
+      .result-box { padding: 0.7rem 0.8rem; }
+      .file-info { font-size: 0.8rem; padding: 0.5rem 0.7rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR (exactly from Age Calculator) -->
-  <nav class="new-nav">
-    <div class="flex items-center">
-      <span class="logo-blue">Pro </span>
-      <span class="logo-orange">Developing</span>
+<nav class="new-nav">
+  <div class="logo">
+    <span class="logo-blue">Pro</span>
+    <span class="logo-orange">Toolss</span>
+  </div>
+  <button id="homeBtn" class="home-btn">
+    <div class="lines">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-    <a id="waTop" class="whatsapp-nav beat" href="#" title="Chat on WhatsApp">
-      <i class="fa-brands fa-whatsapp"></i>
+    <span class="label">Home</span>
+  </button>
+</nav>
+
+<main class="main-container">
+  <div class="hero-text">
+    <h1><i class="fas fa-compress-alt" style="background:linear-gradient(135deg,#2563eb,#ea580c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;"></i> Image Resize to Exact KB</h1>
+    <p>Upload, set target KB, and compress with ±1 KB precision</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <i class="fas fa-cloud-upload-alt" style="color:#2563eb;"></i> Upload & Compress
+    </div>
+    <div class="card-body">
+      <div id="dropzone" class="dropzone">
+        <div class="upload-icon"><i class="fas fa-images"></i></div>
+        <div style="font-weight:500; color:#1e293b; font-size:0.95rem;">Drag & drop or click to browse</div>
+        <label class="file-input-label">Select Image
+          <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+        </label>
+        <div style="font-size: 11px; margin-top: 8px; color:#64748b;">JPG, PNG, WEBP supported</div>
+      </div>
+
+      <div id="fileInfo" class="file-info" style="display: none;">
+        <i class="fas fa-file-image" style="color:#2563eb;"></i> <span id="fileName">--</span> | 
+        <span id="fileSize">-- KB</span>
+      </div>
+
+      <div class="target-area">
+        <div class="label-row">
+          <span><i class="fas fa-keyboard" style="color:#2563eb;"></i> Target Size (KB)</span>
+          <span style="color:#ea580c; font-weight:600;">±1 KB</span>
+        </div>
+        <div class="manual-input-group">
+          <input type="number" id="targetKbInput" value="50" step="any" placeholder="e.g., 5.5">
+          <span class="kb-unit-badge">KB</span>
+        </div>
+        <div class="slider-wrapper">
+          <input type="range" id="kbSlider" min="1" max="5000" value="50" step="0.5">
+        </div>
+        <div class="type-hint">
+          <i class="fas fa-pen"></i> Type any number: 5, 12.3, 25.7, 100 — slider syncs
+        </div>
+        <div id="inputErrorMsg" class="error-hint" style="display: none;"></div>
+      </div>
+
+      <button id="reduceBtn" class="btn-square btn-primary">
+        <i class="fas fa-magic"></i> Compress to Exact KB
+      </button>
+
+      <div class="result-box" id="statusBox">
+        <div id="statusMessage">⚡ Upload image & type any KB target (e.g., 5.5 KB)</div>
+      </div>
+
+      <button id="downloadBtnMain" class="btn-square btn-success" disabled>
+        <i class="fas fa-download"></i> Save Image (Exact Size)
+      </button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="design-footer">
+    Design by
+    <a href="https://www.protoolss.online" target="_blank" class="highlight">
+      Pro Toolss
     </a>
-  </nav>
+  </div>
+</footer>
 
-  <!-- MAIN CONTENT -->
-  <main class="main-container">
-    <div class="hero-text">
-      <h1><i class="fas fa-compress-alt"></i> Image Resize to Exact KB</h1>
-      <p></p>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <i class="fas fa-cloud-upload-alt" style="color:#2563eb;"></i> Upload & Compress
-      </div>
-      <div class="card-body">
-        <!-- Drag & Drop Zone -->
-        <div id="dropzone" class="dropzone">
-          <div class="upload-icon"><i class="fas fa-images"></i></div>
-          <div>Drag & drop or click to browse</div>
-          <label class="file-input-label">Select Image
-            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
-          </label>
-          <div style="font-size: 12px; margin-top: 8px;">JPG, PNG, WEBP supported</div>
-        </div>
+<script>
+  (function() {
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('fileInput');
+    const targetKBInput = document.getElementById('targetKbInput');
+    const kbSlider = document.getElementById('kbSlider');
+    const reduceBtn = document.getElementById('reduceBtn');
+    const downloadBtn = document.getElementById('downloadBtnMain');
+    const statusDiv = document.getElementById('statusMessage');
+    const errorMsgDiv = document.getElementById('inputErrorMsg');
+    const fileInfoDiv = document.getElementById('fileInfo');
+    const fileNameSpan = document.getElementById('fileName');
+    const fileSizeSpan = document.getElementById('fileSize');
 
-        <!-- File info display -->
-        <div id="fileInfo" class="file-info" style="display: none;">
-          <i class="fas fa-file-image"></i> <span id="fileName">--</span> | 
-          <span id="fileSize">-- KB</span>
-        </div>
+    let originalFile = null;
+    let originalImageData = null;
+    let originalWidth = 0, originalHeight = 0;
+    let currentCompressedBlob = null;
+    let currentCompressedSizeKB = 0;
+    let currentValidKB = 50;
+    let isProcessing = false;
 
-        <!-- Manual KB Input -->
-        <div class="target-area">
-          <div class="label-row">
-            <span><i class="fas fa-keyboard"></i> Target Size (KB)</span>
-            <span style="color:#ea580c;">±1 KB tolerance</span>
-          </div>
-          <div class="manual-input-group">
-            <input type="number" id="targetKbInput" value="50" step="any" placeholder="e.g., 5.5">
-            <span class="kb-unit-badge">KB</span>
-          </div>
-          <div class="slider-wrapper">
-            <input type="range" id="kbSlider" min="1" max="1000" value="50" step="0.5">
-          </div>
-          <div class="type-hint">
-            <i class="fas fa-pen"></i> ✅ Type any number: 5, 12.3, 25.7, 100 — slider syncs automatically
-          </div>
-          <div id="inputErrorMsg" class="error-hint" style="display: none;"></div>
-        </div>
-
-        <button id="reduceBtn" class="btn-primary"><i class="fas fa-magic"></i> Compress to Exact KB</button>
-
-        <!-- Result Box -->
-        <div class="result-box" id="statusBox">
-          <div id="statusMessage">⚡ Upload image & type any KB target (e.g., 5.5 KB)</div>
-        </div>
-
-        <button id="downloadBtnMain" disabled><i class="fas fa-download"></i> Save Image (Exact Size)</button>
-      </div>
-    </div>
-  </main>
-
-  <!-- FOOTER (exactly from Age Calculator) -->
-  <footer>
-    <div class="design-footer">
-      Design by 
-      <a href="https://www.prodeveloping.online" target="_blank" class="yellow" style="text-decoration:none;">
-        Pro Developing
-      </a>
-    </div>
-  </footer>
-
-  <!-- Floating WhatsApp (same style) -->
-  <a id="waFloating" class="whatsapp-float beat" href="#" style="position:fixed; right:16px; bottom: calc(var(--footer-height) + 16px); z-index:45;" title="Chat on WhatsApp">
-    <i class="fa-brands fa-whatsapp fa-2x"></i>
-  </a>
-
-  <script>
-    (function() {
-      // DOM elements
-      const dropzone = document.getElementById('dropzone');
-      const fileInput = document.getElementById('fileInput');
-      const targetKBInput = document.getElementById('targetKbInput');
-      const kbSlider = document.getElementById('kbSlider');
-      const reduceBtn = document.getElementById('reduceBtn');
-      const downloadBtn = document.getElementById('downloadBtnMain');
-      const statusDiv = document.getElementById('statusMessage');
-      const errorMsgDiv = document.getElementById('inputErrorMsg');
-      const fileInfoDiv = document.getElementById('fileInfo');
-      const fileNameSpan = document.getElementById('fileName');
-      const fileSizeSpan = document.getElementById('fileSize');
-
-      // State
-      let originalFile = null;
-      let originalBitmap = null;
-      let originalWidth = 0, originalHeight = 0;
-      let currentCompressedBlob = null;
-      let currentCompressedSizeKB = 0;
-      let currentValidKB = 50;
-
-      // Validate and sync
-      function validateAndSync(value, fromSlider = false) {
-        let numValue = parseFloat(value);
-        let isValid = false;
-        let errorMsg = '';
-
-        if (isNaN(numValue)) {
-          errorMsg = '❌ Please enter a valid number (e.g., 5, 12.5, 50)';
-        } else if (numValue < 0.5) {
-          errorMsg = '❌ Minimum target size is 0.5 KB';
-        } else if (numValue > 5000) {
-          errorMsg = '⚠️ Maximum recommended size is 5000 KB';
-          isValid = true;
-        } else {
-          isValid = true;
-        }
-
-        if (!isValid) {
-          errorMsgDiv.style.display = 'block';
-          errorMsgDiv.innerText = errorMsg;
-          reduceBtn.disabled = true;
-          if (!fromSlider) {
-            targetKBInput.value = currentValidKB;
-            kbSlider.value = currentValidKB;
-          }
-          return false;
-        } else {
-          errorMsgDiv.style.display = 'none';
-          reduceBtn.disabled = false;
-          let clamped = Math.min(5000, Math.max(0.5, numValue));
-          currentValidKB = clamped;
-          if (!fromSlider) {
-            targetKBInput.value = clamped;
-            kbSlider.value = clamped;
-          } else {
-            targetKBInput.value = clamped;
-          }
-          return true;
-        }
-      }
-
-      targetKBInput.addEventListener('input', (e) => {
-        let raw = e.target.value;
-        let floatVal = parseFloat(raw);
-        if (!isNaN(floatVal)) {
-          validateAndSync(floatVal, false);
-        } else {
-          if (raw === '') {
-            errorMsgDiv.style.display = 'block';
-            errorMsgDiv.innerText = '❌ Please enter a valid KB value';
-            reduceBtn.disabled = true;
-          } else {
-            validateAndSync(raw, false);
-          }
-        }
-      });
-
-      kbSlider.addEventListener('input', (e) => {
-        let val = parseFloat(e.target.value);
-        if (!isNaN(val)) {
-          validateAndSync(val, true);
-        }
-      });
-
-      document.querySelectorAll('.quick-badge').forEach(badge => {
-        badge.addEventListener('click', () => {
-          const kb = parseFloat(badge.getAttribute('data-kb'));
-          if (!isNaN(kb)) {
-            validateAndSync(kb, false);
-          }
-        });
-      });
-
-      function handleFile(file) {
-        if (!file) return;
-        if (!file.type.match(/image\/(jpeg|png|webp)/)) {
-          statusDiv.innerHTML = '<span class="error-text"><i class="fas fa-exclamation-triangle"></i> Unsupported format. Use JPG, PNG, WEBP.</span>';
-          originalFile = null;
-          currentCompressedBlob = null;
-          downloadBtn.disabled = true;
-          fileInfoDiv.style.display = 'none';
-          return;
-        }
-        originalFile = file;
-        currentCompressedBlob = null;
-        downloadBtn.disabled = true;
-        
-        fileNameSpan.innerText = file.name.length > 30 ? file.name.slice(0, 27) + '...' : file.name;
-        fileSizeSpan.innerText = (file.size / 1024).toFixed(2) + ' KB';
-        fileInfoDiv.style.display = 'block';
-        
+    function loadImageBitmap(file) {
+      return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = function(e) {
           const img = new Image();
-          img.onload = () => {
-            originalWidth = img.width;
-            originalHeight = img.height;
-            if (originalBitmap) originalBitmap.close();
-            createImageBitmap(img).then(bitmap => {
-              originalBitmap = bitmap;
-            }).catch(console.warn);
-            statusDiv.innerHTML = `✅ "${file.name}" (${(file.size/1024).toFixed(1)} KB) — Target KB: ${currentValidKB}`;
+          img.onload = function() {
+            if (window.createImageBitmap) {
+              createImageBitmap(img).then(resolve).catch(() => {
+                resolve(img);
+              });
+            } else {
+              resolve(img);
+            }
           };
+          img.onerror = reject;
           img.src = e.target.result;
         };
+        reader.onerror = reject;
         reader.readAsDataURL(file);
+      });
+    }
+
+    function validateAndSync(value, fromSlider = false) {
+      let numValue = parseFloat(value);
+      let isValid = false;
+      let errorMsg = '';
+
+      if (isNaN(numValue)) {
+        errorMsg = '❌ Please enter a valid number (e.g., 5, 12.5, 50)';
+      } else if (numValue < 0.5) {
+        errorMsg = '❌ Minimum target size is 0.5 KB';
+      } else if (numValue > 5000) {
+        errorMsg = '⚠️ Maximum size is 5000 KB';
+        isValid = true;
+      } else {
+        isValid = true;
       }
 
-      dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
-      dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
-      dropzone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropzone.classList.remove('drag-over');
-        if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-      });
-      dropzone.addEventListener('click', () => fileInput.click());
-      fileInput.addEventListener('change', (e) => { if (e.target.files.length) handleFile(e.target.files[0]); fileInput.value = ''; });
-
-      // Compression algorithm
-      async function compressToExactKB(targetKB) {
-        if (!originalBitmap) throw new Error('No image loaded');
-        const targetBytes = targetKB * 1024;
-        const minBytes = targetBytes - 1024;
-        const maxBytes = targetBytes + 1024;
-
-        let bestBlob = null;
-        let bestDiff = Infinity;
-
-        async function encodeWith(quality, mimeType, scale = 1.0) {
-          const canvas = document.createElement('canvas');
-          let w = originalWidth, h = originalHeight;
-          if (scale < 0.99) {
-            w = Math.max(32, Math.floor(originalWidth * scale));
-            h = Math.max(32, Math.floor(originalHeight * scale));
-          }
-          canvas.width = w;
-          canvas.height = h;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(originalBitmap, 0, 0, w, h);
-          return new Promise((resolve) => {
-            canvas.toBlob(resolve, mimeType, quality);
-          });
+      if (!isValid) {
+        errorMsgDiv.style.display = 'block';
+        errorMsgDiv.innerText = errorMsg;
+        reduceBtn.disabled = true;
+        if (!fromSlider) {
+          targetKBInput.value = currentValidKB;
+          kbSlider.value = currentValidKB;
         }
+        return false;
+      } else {
+        errorMsgDiv.style.display = 'none';
+        reduceBtn.disabled = false;
+        let clamped = Math.min(5000, Math.max(0.5, numValue));
+        currentValidKB = clamped;
+        if (!fromSlider) {
+          targetKBInput.value = clamped;
+          kbSlider.value = clamped;
+        } else {
+          targetKBInput.value = clamped;
+        }
+        return true;
+      }
+    }
+
+    targetKBInput.addEventListener('input', function(e) {
+      let raw = e.target.value;
+      let floatVal = parseFloat(raw);
+      if (!isNaN(floatVal)) {
+        validateAndSync(floatVal, false);
+      } else {
+        if (raw === '') {
+          errorMsgDiv.style.display = 'block';
+          errorMsgDiv.innerText = '❌ Please enter a valid KB value';
+          reduceBtn.disabled = true;
+        } else {
+          validateAndSync(raw, false);
+        }
+      }
+    });
+
+    kbSlider.addEventListener('input', function(e) {
+      let val = parseFloat(e.target.value);
+      if (!isNaN(val)) {
+        validateAndSync(val, true);
+      }
+    });
+
+    async function handleFile(file) {
+      if (!file) return;
+      if (!file.type.match(/image\/(jpeg|png|webp)/)) {
+        statusDiv.innerHTML = '<span class="error-text"><i class="fas fa-exclamation-triangle"></i> Unsupported format. Use JPG, PNG, WEBP.</span>';
+        originalFile = null;
+        originalImageData = null;
+        currentCompressedBlob = null;
+        downloadBtn.disabled = true;
+        fileInfoDiv.style.display = 'none';
+        return;
+      }
+      
+      originalFile = file;
+      currentCompressedBlob = null;
+      downloadBtn.disabled = true;
+      
+      fileNameSpan.innerText = file.name.length > 28 ? file.name.slice(0, 25) + '...' : file.name;
+      fileSizeSpan.innerText = (file.size / 1024).toFixed(2) + ' KB';
+      fileInfoDiv.style.display = 'block';
+      
+      try {
+        const imgData = await loadImageBitmap(file);
+        originalImageData = imgData;
+        originalWidth = imgData.width || imgData.naturalWidth || 0;
+        originalHeight = imgData.height || imgData.naturalHeight || 0;
+        statusDiv.innerHTML = `✅ "${file.name}" (${(file.size/1024).toFixed(1)} KB) — Target KB: ${currentValidKB}`;
+      } catch (err) {
+        statusDiv.innerHTML = '<span class="error-text"><i class="fas fa-exclamation-triangle"></i> Failed to load image.</span>';
+        originalImageData = null;
+      }
+    }
+
+    dropzone.addEventListener('dragover', function(e) { e.preventDefault(); dropzone.classList.add('drag-over'); });
+    dropzone.addEventListener('dragleave', function() { dropzone.classList.remove('drag-over'); });
+    dropzone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      dropzone.classList.remove('drag-over');
+      if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+    });
+    dropzone.addEventListener('click', function() { fileInput.click(); });
+    fileInput.addEventListener('change', function(e) { if (e.target.files.length) handleFile(e.target.files[0]); fileInput.value = ''; });
+
+    function getMimeType(blob) {
+      if (!blob) return 'image/jpeg';
+      const type = blob.type || '';
+      if (type.includes('webp')) return 'image/webp';
+      if (type.includes('png')) return 'image/png';
+      return 'image/jpeg';
+    }
+
+    function getExtension(mimeType) {
+      if (mimeType === 'image/webp') return 'webp';
+      if (mimeType === 'image/png') return 'png';
+      return 'jpg';
+    }
+
+    async function compressToExactKB(targetKB) {
+      if (!originalImageData) throw new Error('No image loaded');
+      
+      const targetBytes = targetKB * 1024;
+      const minBytes = Math.max(512, targetBytes - 1024);
+      const maxBytes = targetBytes + 1024;
+
+      let bestBlob = null;
+      let bestDiff = Infinity;
+
+      async function encodeWith(quality, mimeType, scale = 1.0) {
+        const canvas = document.createElement('canvas');
+        let w = originalWidth, h = originalHeight;
+        if (scale < 0.99) {
+          w = Math.max(16, Math.floor(originalWidth * scale));
+          h = Math.max(16, Math.floor(originalHeight * scale));
+        }
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(originalImageData, 0, 0, w, h);
+        return new Promise(function(resolve) {
+          canvas.toBlob(resolve, mimeType, quality);
+        });
+      }
 
       const mimeOrder = ['image/webp', 'image/jpeg'];
-        for (let idx = 0; idx < mimeOrder.length; idx++) {
-          const mime = mimeOrder[idx];
-          let low = 0.08, high = 0.96;
-          for (let iter = 0; iter < 12; iter++) {
-            const mid = (low + high) / 2;
-            const blob = await encodeWith(mid, mime, 1.0);
-            if (!blob) continue;
-            const diff = Math.abs(blob.size - targetBytes);
-            if (diff < bestDiff) { bestDiff = diff; bestBlob = blob; }
-            if (blob.size >= minBytes && blob.size <= maxBytes) { bestBlob = blob; bestDiff = 0; break; }
-            if (blob.size > targetBytes) high = mid;
-            else low = mid;
+      
+      for (let idx = 0; idx < mimeOrder.length; idx++) {
+        const mime = mimeOrder[idx];
+        let low = 0.05, high = 0.98;
+        for (let iter = 0; iter < 15; iter++) {
+          const mid = (low + high) / 2;
+          const blob = await encodeWith(mid, mime, 1.0);
+          if (!blob) continue;
+          const diff = Math.abs(blob.size - targetBytes);
+          if (diff < bestDiff) { bestDiff = diff; bestBlob = blob; }
+          if (blob.size >= minBytes && blob.size <= maxBytes) { bestBlob = blob; bestDiff = 0; break; }
+          if (blob.size > targetBytes) high = mid;
+          else low = mid;
+        }
+        if (bestBlob && bestBlob.size >= minBytes && bestBlob.size <= maxBytes) break;
+      }
+
+      if (!bestBlob || bestBlob.size > maxBytes || bestBlob.size < minBytes) {
+        let scaleFactor = 0.95;
+        const minScale = 0.12;
+        for (let step = 0; step < 8; step++) {
+          if (bestBlob && bestBlob.size >= minBytes && bestBlob.size <= maxBytes) break;
+          if (bestBlob && bestBlob.size > maxBytes) {
+            scaleFactor = Math.max(minScale, scaleFactor * 0.78);
+          } else if (bestBlob && bestBlob.size < minBytes) {
+            break;
+          } else {
+            scaleFactor = Math.max(minScale, scaleFactor * 0.82);
+          }
+          const testQuality = 0.75;
+          for (let m = 0; m < mimeOrder.length; m++) {
+            const scaledBlob = await encodeWith(testQuality, mimeOrder[m], scaleFactor);
+            if (scaledBlob) {
+              const diffScaled = Math.abs(scaledBlob.size - targetBytes);
+              if (diffScaled < bestDiff) { bestDiff = diffScaled; bestBlob = scaledBlob; }
+              if (scaledBlob.size >= minBytes && scaledBlob.size <= maxBytes) break;
+            }
           }
           if (bestBlob && bestBlob.size >= minBytes && bestBlob.size <= maxBytes) break;
+          if (scaleFactor <= minScale) break;
         }
-
-        if (!bestBlob || bestBlob.size > maxBytes || bestBlob.size < minBytes) {
-          let scaleFactor = 0.92;
-          const minScale = 0.18;
-          for (let step = 0; step < 6; step++) {
-            if (bestBlob && bestBlob.size >= minBytes && bestBlob.size <= maxBytes) break;
-            if (bestBlob && bestBlob.size > maxBytes) scaleFactor = Math.max(minScale, scaleFactor * 0.82);
-            else if (bestBlob && bestBlob.size < minBytes) break;
-            else scaleFactor = Math.max(minScale, scaleFactor * 0.85);
-            const testQuality = 0.72;
-            for (let m = 0; m < mimeOrder.length; m++) {
-              const scaledBlob = await encodeWith(testQuality, mimeOrder[m], scaleFactor);
-              if (scaledBlob) {
-                const diffScaled = Math.abs(scaledBlob.size - targetBytes);
-                if (diffScaled < bestDiff) { bestDiff = diffScaled; bestBlob = scaledBlob; }
-                if (scaledBlob.size >= minBytes && scaledBlob.size <= maxBytes) break;
-              }
-            }
-            if (bestBlob && bestBlob.size >= minBytes && bestBlob.size <= maxBytes) break;
-            if (scaleFactor <= minScale) break;
-          }
-        }
-
-        if (bestBlob && (bestBlob.size > maxBytes || bestBlob.size < minBytes)) {
-          let currentScale = 1.0;
-          if (bestBlob.size > maxBytes) currentScale = 0.85;
-          let lowQ = 0.12, highQ = 0.94;
-          for (let fine = 0; fine < 10; fine++) {
-            const midQ = (lowQ + highQ) / 2;
-            const tryBlob = await encodeWith(midQ, bestBlob.type || 'image/jpeg', currentScale);
-            if (tryBlob) {
-              const diffTry = Math.abs(tryBlob.size - targetBytes);
-              if (diffTry < bestDiff) { bestDiff = diffTry; bestBlob = tryBlob; }
-              if (tryBlob.size > targetBytes) highQ = midQ;
-              else lowQ = midQ;
-              if (tryBlob.size >= minBytes && tryBlob.size <= maxBytes) break;
-            }
-          }
-        }
-        if (!bestBlob) throw new Error('Cannot compress to target size');
-        return bestBlob;
       }
 
-      async function performResize() {
-        if (!originalFile || !originalBitmap) {
-          statusDiv.innerHTML = '<span class="error-text"><i class="fas fa-times-circle"></i> Please upload an image first.</span>';
-          return;
+      if (bestBlob && (bestBlob.size > maxBytes || bestBlob.size < minBytes)) {
+        let currentScale = 1.0;
+        if (bestBlob.size > maxBytes) currentScale = 0.8;
+        let lowQ = 0.05, highQ = 0.98;
+        const mime = getMimeType(bestBlob);
+        for (let fine = 0; fine < 12; fine++) {
+          const midQ = (lowQ + highQ) / 2;
+          const tryBlob = await encodeWith(midQ, mime, currentScale);
+          if (tryBlob) {
+            const diffTry = Math.abs(tryBlob.size - targetBytes);
+            if (diffTry < bestDiff) { bestDiff = diffTry; bestBlob = tryBlob; }
+            if (tryBlob.size > targetBytes) highQ = midQ;
+            else lowQ = midQ;
+            if (tryBlob.size >= minBytes && tryBlob.size <= maxBytes) break;
+          }
         }
+      }
+
+      if (!bestBlob) {
+        const fallbackBlob = await encodeWith(0.85, 'image/jpeg', 0.7);
+        if (fallbackBlob) bestBlob = fallbackBlob;
+        else throw new Error('Cannot compress image');
+      }
+      
+      return bestBlob;
+    }
+
+    async function performResize() {
+      if (isProcessing) return;
+      if (!originalFile || !originalImageData) {
+        statusDiv.innerHTML = '<span class="error-text"><i class="fas fa-times-circle"></i> Please upload an image first.</span>';
+        return;
+      }
+      
+      let targetKB = parseFloat(targetKBInput.value);
+      if (isNaN(targetKB) || targetKB < 0.5) {
+        statusDiv.innerHTML = '<span class="error-text">❌ Invalid target KB. Please type a number >= 0.5</span>';
+        return;
+      }
+      targetKB = Math.min(5000, Math.max(0.5, targetKB));
+      
+      isProcessing = true;
+      reduceBtn.disabled = true;
+      downloadBtn.disabled = true;
+      statusDiv.innerHTML = `<div class="loader"><span></span><span></span><span></span></div> Compressing to exactly ${targetKB} KB ...`;
+      
+      try {
+        const compressed = await compressToExactKB(targetKB);
+        if (!compressed) throw new Error('Compression failed');
         
-        let targetKB = parseFloat(targetKBInput.value);
-        if (isNaN(targetKB) || targetKB < 0.5) {
-          statusDiv.innerHTML = '<span class="error-text">❌ Invalid target KB. Please type a number >= 0.5</span>';
-          return;
+        const finalKB = compressed.size / 1024;
+        currentCompressedBlob = compressed;
+        currentCompressedSizeKB = finalKB;
+        
+        const diff = Math.abs(finalKB - targetKB);
+        if (diff <= 1.0) {
+          statusDiv.innerHTML = `<i class="fas fa-check-circle" style="color:#10b981;"></i> ✅ Final size: ${finalKB.toFixed(2)} KB (Target: ${targetKB} KB) — within ±1KB!`;
+        } else if (diff <= 2.5) {
+          statusDiv.innerHTML = `<i class="fas fa-thumbs-up" style="color:#2563eb;"></i> Final size: ${finalKB.toFixed(2)} KB (Target: ${targetKB} KB) — very close.`;
+        } else {
+          statusDiv.innerHTML = `<span class="error-text">⚠️ Final size: ${finalKB.toFixed(2)} KB | Target: ${targetKB} KB (best possible)</span>`;
         }
-        targetKB = Math.min(5000, Math.max(0.5, targetKB));
-        
-        reduceBtn.disabled = true;
+        downloadBtn.disabled = false;
+      } catch (err) {
+        statusDiv.innerHTML = `<span class="error-text"><i class="fas fa-exclamation-triangle"></i> Error: ${err.message || 'Try a higher target KB.'}</span>`;
+        currentCompressedBlob = null;
         downloadBtn.disabled = true;
-        statusDiv.innerHTML = `<div class="loader"><span></span><span></span><span></span></div> Compressing to exactly ${targetKB} KB ...`;
-        
-        try {
-          const compressed = await compressToExactKB(targetKB);
-          if (!compressed) throw new Error('No blob');
-          const finalKB = compressed.size / 1024;
-          currentCompressedBlob = compressed;
-          currentCompressedSizeKB = finalKB;
-          
-          const diff = Math.abs(finalKB - targetKB);
-          if (diff <= 1.0) {
-            statusDiv.innerHTML = `<i class="fas fa-check-circle" style="color:#10b981;"></i> ✅ Final size: ${finalKB.toFixed(2)} KB (Target: ${targetKB} KB) — within ±1KB!`;
-          } else if (diff <= 2.5) {
-            statusDiv.innerHTML = `<i class="fas fa-thumbs-up"></i> Final size: ${finalKB.toFixed(2)} KB (Target: ${targetKB} KB) — very close.`;
-          } else {
-            statusDiv.innerHTML = `<span class="error-text">⚠️ Final size: ${finalKB.toFixed(2)} KB | Target: ${targetKB} KB (best possible)</span>`;
-          }
-          downloadBtn.disabled = false;
-        } catch (err) {
-          console.error(err);
-          statusDiv.innerHTML = `<span class="error-text"><i class="fas fa-exclamation-triangle"></i> Error: ${err.message || 'Try a higher target KB.'}</span>`;
-          currentCompressedBlob = null;
-          downloadBtn.disabled = true;
-        } finally {
-          reduceBtn.disabled = false;
-        }
+      } finally {
+        isProcessing = false;
+        reduceBtn.disabled = false;
       }
+    }
 
-      function downloadImage() {
-        if (!currentCompressedBlob) {
-          statusDiv.innerHTML = '<span class="error-text">No compressed image, click "Compress" first.</span>';
-          return;
-        }
-        const link = document.createElement('a');
-        const url = URL.createObjectURL(currentCompressedBlob);
-        let ext = 'jpg';
-        if (currentCompressedBlob.type === 'image/webp') ext = 'webp';
-        else if (currentCompressedBlob.type === 'image/png') ext = 'png';
-        link.href = url;
-        link.download = `exact_${currentCompressedSizeKB.toFixed(1)}kb.${ext}`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-        statusDiv.innerHTML = `<i class="fas fa-download"></i> Downloaded! (${currentCompressedSizeKB.toFixed(2)} KB)`;
+    function downloadImage() {
+      if (!currentCompressedBlob) {
+        statusDiv.innerHTML = '<span class="error-text">No compressed image, click "Compress" first.</span>';
+        return;
       }
+      
+      const mimeType = getMimeType(currentCompressedBlob);
+      const ext = getExtension(mimeType);
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(currentCompressedBlob);
+      link.href = url;
+      link.download = `exact_${currentCompressedSizeKB.toFixed(1)}kb.${ext}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(function() { URL.revokeObjectURL(url); }, 100);
+      statusDiv.innerHTML = `<i class="fas fa-download" style="color:#059669;"></i> Downloaded! (${currentCompressedSizeKB.toFixed(2)} KB)`;
+    }
 
-      reduceBtn.addEventListener('click', performResize);
-      downloadBtn.addEventListener('click', downloadImage);
+    reduceBtn.addEventListener('click', performResize);
+    downloadBtn.addEventListener('click', downloadImage);
 
-      validateAndSync(50, false);
+    validateAndSync(50, false);
 
-      // WhatsApp integration (same as age calculator)
-      const waNumber = '916356952788';
-      const waMessage = encodeURIComponent('Hello! I am using your Exact KB Image Resizer 😊');
-      document.getElementById('waTop').addEventListener('click', (e) => {
-        e.preventDefault();
-        window.open(`https://wa.me/${waNumber}?text=${waMessage}`, '_blank');
-      });
-      document.getElementById('waFloating').addEventListener('click', (e) => {
-        e.preventDefault();
-        window.open(`https://wa.me/${waNumber}?text=${waMessage}`, '_blank');
-      });
-    })();
-  </script>
+    document.getElementById('homeBtn').addEventListener('click', function() {
+      window.location.href = 'https://www.protoolss.online';
+    });
+  })();
+</script>
 </body>
 </html>

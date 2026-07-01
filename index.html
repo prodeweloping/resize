@@ -592,7 +592,7 @@
 
     async function handleFile(file) {
       if (!file) return;
-      if (!file.type.match(/image\/(jpeg|png|webp)/)) {
+      if (!file.type.match(/image\/(jpeg|jpg|png|webp)/)) {
         statusDiv.innerHTML = '<span class="error-text"><i class="fas fa-exclamation-triangle"></i> Unsupported format. Use JPG, PNG, WEBP.</span>';
         originalFile = null;
         originalImageData = null;
@@ -632,19 +632,9 @@
     dropzone.addEventListener('click', function() { fileInput.click(); });
     fileInput.addEventListener('change', function(e) { if (e.target.files.length) handleFile(e.target.files[0]); fileInput.value = ''; });
 
-    function getMimeType(blob) {
-      if (!blob) return 'image/jpeg';
-      const type = blob.type || '';
-      if (type.includes('webp')) return 'image/webp';
-      if (type.includes('png')) return 'image/png';
-      return 'image/jpeg';
-    }
+    function getMimeType(blob){return 'image/jpeg';}
 
-    function getExtension(mimeType) {
-      if (mimeType === 'image/webp') return 'webp';
-      if (mimeType === 'image/png') return 'png';
-      return 'jpg';
-    }
+    function getExtension(){return 'jpg';}
 
     async function compressToExactKB(targetKB) {
       if (!originalImageData) throw new Error('No image loaded');
@@ -667,14 +657,16 @@
         canvas.height = h;
         const ctx = canvas.getContext('2d');
         ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
-        ctx.drawImage(originalImageData, 0, 0, w, h);
+        ctx.imageSmoothingQuality='high';
+        ctx.fillStyle='#ffffff';
+        ctx.fillRect(0,0,w,h);
+        ctx.drawImage(originalImageData,0,0,w,h);
         return new Promise(function(resolve) {
           canvas.toBlob(resolve, mimeType, quality);
         });
       }
 
-      const mimeOrder = ['image/webp', 'image/jpeg'];
+      const mimeOrder = ['image/jpeg'];
       
       for (let idx = 0; idx < mimeOrder.length; idx++) {
         const mime = mimeOrder[idx];
@@ -802,7 +794,7 @@
       const link = document.createElement('a');
       const url = URL.createObjectURL(currentCompressedBlob);
       link.href = url;
-      link.download = `exact_${currentCompressedSizeKB.toFixed(1)}kb.${ext}`;
+      link.download=`exact_${currentCompressedSizeKB.toFixed(1)}kb.jpg`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
